@@ -8,7 +8,10 @@ import org.springframework.data.repository.query.Param;
 import viet.io.threadsbe.dto.projection.PostLikeCount;
 import viet.io.threadsbe.entity.Like;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 
 public interface LikeRepository extends JpaRepository<Like, UUID> {
 
@@ -22,11 +25,11 @@ public interface LikeRepository extends JpaRepository<Like, UUID> {
     Set<UUID> findLikedPostIdsByUser(@Param("userId") UUID userId, @Param("postIds") List<UUID> postIds);
 
     Long countByPostId(UUID postId);
+
     void deleteByPostId(UUID postId);
-    void deleteByPostIdAndUserId(UUID postId, UUID userId);
-    boolean existsByPostIdAndUserId(UUID postId, UUID userId);
 
     Optional<Like> findByPostIdAndUserId(UUID postId, UUID userId);
+
     List<Like> findUsersByPostId(UUID postId, Pageable pageable);
 
 }

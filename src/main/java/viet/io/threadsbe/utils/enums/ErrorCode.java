@@ -3,9 +3,6 @@ package viet.io.threadsbe.utils.enums;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-import java.util.Arrays;
-import java.util.Optional;
-
 @Getter
 public enum ErrorCode {
     // Authentication & Authorization
@@ -47,12 +44,5 @@ public enum ErrorCode {
     ErrorCode(HttpStatus status, String message) {
         this.status = status;
         this.message = message;
-    }
-
-    // Static method to map HttpStatus to ErrorCode
-    public static Optional<ErrorCode> fromHttpStatus(HttpStatus status) {
-        return Arrays.stream(values())
-                .filter(errorCode -> errorCode.getStatus() == status)
-                .findFirst();
     }
 }

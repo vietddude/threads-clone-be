@@ -2,7 +2,6 @@ package viet.io.threadsbe.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 import viet.io.threadsbe.utils.enums.NotificationType;
 
 @Entity

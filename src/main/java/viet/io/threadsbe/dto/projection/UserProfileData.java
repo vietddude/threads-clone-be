@@ -1,10 +1,10 @@
 package viet.io.threadsbe.dto.projection;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import viet.io.threadsbe.entity.User;
 
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor

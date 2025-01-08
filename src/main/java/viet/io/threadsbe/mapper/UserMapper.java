@@ -1,13 +1,12 @@
 package viet.io.threadsbe.mapper;
 
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 import viet.io.threadsbe.dto.CompactUserDTO;
-import viet.io.threadsbe.dto.ProfileDTO;
 import viet.io.threadsbe.dto.UserDTO;
 import viet.io.threadsbe.dto.auth.UserInfo;
-import viet.io.threadsbe.dto.response.Profile;
-import viet.io.threadsbe.dto.response.SearchUserResponse;
 import viet.io.threadsbe.entity.User;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)

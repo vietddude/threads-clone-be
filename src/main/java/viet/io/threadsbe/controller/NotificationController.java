@@ -11,7 +11,6 @@ import viet.io.threadsbe.dto.response.PaginatedResponse;
 import viet.io.threadsbe.security.SecurityUtils;
 import viet.io.threadsbe.service.NotificationService;
 
-import java.security.Principal;
 import java.util.UUID;
 
 @RestController

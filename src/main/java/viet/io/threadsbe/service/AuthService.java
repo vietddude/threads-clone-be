@@ -4,12 +4,12 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClient;
-import org.springframework.http.*;
 import viet.io.threadsbe.dto.UserDTO;
 import viet.io.threadsbe.dto.auth.OauthRequest;
 import viet.io.threadsbe.dto.auth.OauthResponse;
@@ -33,20 +33,17 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class AuthService {
 
-    @Value("${google.client.id}")
-    private String clientId;
-
-    @Value("${google.client.secret}")
-    private String clientSecret;
-
-    @Value("${google.redirect.uri}")
-    private String redirectUri;
-
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final RestClient googleRestClient;
     private final RedisService redisService;
     private final JwtService jwtService;
+    @Value("${google.client.id}")
+    private String clientId;
+    @Value("${google.client.secret}")
+    private String clientSecret;
+    @Value("${google.redirect.uri}")
+    private String redirectUri;
 
     private TokenResponse getOauthTokens(String code) {
         // Tạo form data

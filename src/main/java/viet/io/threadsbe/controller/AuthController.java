@@ -52,7 +52,7 @@ public class AuthController {
     @PostMapping("/refresh-token")
     public ResponseEntity<RefreshTokenResponse> refresh(@RequestBody @NotNull RefreshTokenRequest request) {
         UUID authId = SecurityUtils.getCurrentUserId();
-        RefreshTokenResponse tokens =  authService.refresh(authId, request);
+        RefreshTokenResponse tokens = authService.refresh(authId, request);
         return ResponseEntity.ok()
                 .header("Set-Cookie", tokens.getRefreshToken())
                 .body(new RefreshTokenResponse(

@@ -4,11 +4,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import viet.io.threadsbe.dto.ProfileDTO;
-import viet.io.threadsbe.dto.response.*;
+import viet.io.threadsbe.dto.response.PaginatedResponse;
 import viet.io.threadsbe.security.SecurityUtils;
 import viet.io.threadsbe.service.UserService;
 
-import java.security.Principal;
 import java.util.UUID;
 
 @RestController

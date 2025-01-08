@@ -5,15 +5,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import viet.io.threadsbe.dto.projection.PostReplyCount;
 import viet.io.threadsbe.entity.Repost;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 
-public interface RepostRepository  extends JpaRepository<Repost, UUID> {
-
-    @Query("SELECT r.post.id as postId, COUNT(r) as count FROM Repost r WHERE r.post.id IN :postIds GROUP BY r.post.id")
-    List<PostReplyCount> countRepostsByPostIds(@Param("postIds") List<UUID> postIds);
+public interface RepostRepository extends JpaRepository<Repost, UUID> {
 
     @Query("SELECT r.post.id FROM Repost r WHERE r.user.id = :userId AND r.post.id IN :postIds")
     Set<UUID> findRepostedPostIdsByUser(@Param("userId") UUID userId, @Param("postIds") List<UUID> postIds);

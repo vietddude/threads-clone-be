@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import viet.io.threadsbe.dto.projection.UserListData;
-import viet.io.threadsbe.dto.projection.UserProfileData;
 import viet.io.threadsbe.entity.User;
 
 import java.util.List;
@@ -31,14 +30,14 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     List<User> findRecentFollowers(@Param("user") User user);
 
     @Query("""
-        SELECT new viet.io.threadsbe.dto.projection.UserListData(
-            u,
-            COUNT(f1) as followerCount,
-            EXISTS(SELECT 1 FROM Follow f2 WHERE f2.follower.id = :authId AND f2.followee = u) as isFollowing
-        )
-        FROM User u
-        LEFT JOIN Follow f1 ON f1.followee = u
-        GROUP BY u
-        """)
+            SELECT new viet.io.threadsbe.dto.projection.UserListData(
+                u,
+                COUNT(f1) as followerCount,
+                EXISTS(SELECT 1 FROM Follow f2 WHERE f2.follower.id = :authId AND f2.followee = u) as isFollowing
+            )
+            FROM User u
+            LEFT JOIN Follow f1 ON f1.followee = u
+            GROUP BY u
+            """)
     Page<UserListData> getUsersWithFollowData(@Param("authId") UUID authId, Pageable pageable);
 }

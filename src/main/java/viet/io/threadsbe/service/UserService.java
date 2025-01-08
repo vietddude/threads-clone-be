@@ -12,7 +12,7 @@ import viet.io.threadsbe.dto.CompactUserDTO;
 import viet.io.threadsbe.dto.ProfileDTO;
 import viet.io.threadsbe.dto.UserDTO;
 import viet.io.threadsbe.dto.projection.UserListData;
-import viet.io.threadsbe.dto.response.*;
+import viet.io.threadsbe.dto.response.PaginatedResponse;
 import viet.io.threadsbe.entity.Follow;
 import viet.io.threadsbe.entity.User;
 import viet.io.threadsbe.mapper.UserMapper;

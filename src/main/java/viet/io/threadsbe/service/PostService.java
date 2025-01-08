@@ -18,7 +18,10 @@ import viet.io.threadsbe.dto.projection.RepliesResult;
 import viet.io.threadsbe.dto.request.CreatePostRequest;
 import viet.io.threadsbe.dto.request.ReplyPostRequest;
 import viet.io.threadsbe.dto.response.*;
-import viet.io.threadsbe.entity.*;
+import viet.io.threadsbe.entity.Like;
+import viet.io.threadsbe.entity.Post;
+import viet.io.threadsbe.entity.Repost;
+import viet.io.threadsbe.entity.User;
 import viet.io.threadsbe.mapper.PostMapper;
 import viet.io.threadsbe.mapper.UserMapper;
 import viet.io.threadsbe.repository.*;
@@ -209,7 +212,7 @@ public class PostService {
         }
     }
 
-    public PostResponse replyPost(ReplyPostRequest request,UUID authId) {
+    public PostResponse replyPost(ReplyPostRequest request, UUID authId) {
         User user = userRepository.findById(authId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
@@ -245,11 +248,6 @@ public class PostService {
         List<UUID> likeUserIds = likes.stream()
                 .map(like -> like.getUser().getId())
                 .toList();
-
-        Set<UUID> followingIds = followRepository.findByFollowerIdAndFolloweeIds(authId, likeUserIds)
-                .stream()
-                .map(follow -> follow.getFollowee().getId())
-                .collect(Collectors.toSet());
 
         List<UserDTO> likers = likes.stream()
                 .map(like -> {

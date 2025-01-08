@@ -17,41 +17,41 @@ import java.util.UUID;
 public interface PostRepository extends JpaRepository<Post, UUID> {
 
     @Query(value = """
-       WITH RECURSIVE PostTree AS (
-           SELECT
-               id,
-               parent_post_id,
-               0 as depth
-           FROM posts
-           WHERE id = :postId
-           
-           UNION ALL
-           
-           SELECT
-               p.id,
-               p.parent_post_id,
-               pt.depth + 1
-           FROM posts p
-           INNER JOIN PostTree pt ON p.id = pt.parent_post_id
-       )
-       SELECT id, parent_post_id as parentPostId, depth
-       FROM PostTree
-       ORDER BY depth DESC
-    """, nativeQuery = true)
+               WITH RECURSIVE PostTree AS (
+                   SELECT
+                       id,
+                       parent_post_id,
+                       0 as depth
+                   FROM posts
+                   WHERE id = :postId
+                   
+                   UNION ALL
+                   
+                   SELECT
+                       p.id,
+                       p.parent_post_id,
+                       pt.depth + 1
+                   FROM posts p
+                   INNER JOIN PostTree pt ON p.id = pt.parent_post_id
+               )
+               SELECT id, parent_post_id as parentPostId, depth
+               FROM PostTree
+               ORDER BY depth DESC
+            """, nativeQuery = true)
     List<NestedProjection> findNestedPosts(@Param("postId") UUID postId);
 
     @Query("""
-        SELECT new viet.io.threadsbe.dto.projection.RepliesResult(
-            p.parentPost.id,
-            new viet.io.threadsbe.dto.CompactUserDTO(
-                p.author.id, p.author.username, p.author.image
+            SELECT new viet.io.threadsbe.dto.projection.RepliesResult(
+                p.parentPost.id,
+                new viet.io.threadsbe.dto.CompactUserDTO(
+                    p.author.id, p.author.username, p.author.image
+                )
             )
-        )
-        FROM Post p
-        WHERE p.parentPost.id IN :parentPostIds
-        ORDER BY p.createdAt DESC
-        LIMIT 2
-        """)
+            FROM Post p
+            WHERE p.parentPost.id IN :parentPostIds
+            ORDER BY p.createdAt DESC
+            LIMIT 2
+            """)
     List<RepliesResult> findRepliesByParentPostIds(@Param("parentPostIds") List<UUID> parentPostIds);
 
     List<Post> findByParentPostId(UUID parentPostId);
