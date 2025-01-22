@@ -67,7 +67,7 @@ CREATE TABLE notifications
 (
     id               UUID PRIMARY KEY           DEFAULT gen_random_uuid(),
     read             BOOLEAN                    DEFAULT false,
-    type             notification_type NOT NULL,
+    type             VARCHAR(255) NOT NULL,
     message          VARCHAR(255),
     is_public        BOOLEAN,
     sender_user_id   UUID              NOT NULL REFERENCES users (id) ON DELETE CASCADE,

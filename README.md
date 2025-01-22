@@ -2,6 +2,8 @@
 
 Threads Backend is a backend service for a social media application built with Spring Boot. It provides APIs for user authentication, post creation, likes, reposts, notifications, and more.
 
+The service supports login via Google OAuth, enabling seamless and secure user authentication using their Google accounts.
+
 To frontend repo: [Frontend Repository](https://github.com/vietddude/threads-clone-fe)
 
 ## Table of Contents
@@ -10,8 +12,8 @@ To frontend repo: [Frontend Repository](https://github.com/vietddude/threads-clo
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Usage](#usage)
-- [API Endpoints](#api-endpoints)
-- [Running Tests](#running-tests)
+- [Swagger Documentation](#swagger-documentation)
+- [Database Migration](#database-migration)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -27,8 +29,8 @@ To frontend repo: [Frontend Repository](https://github.com/vietddude/threads-clo
 1. Clone the repository:
 
 ```sh
-git clone https://github.com/yourusername/threadsbe.git
-cd threadsbe
+git clone https://github.com/vietddude/threads-clone-be.git
+cd threads-clone-be
 ```
 
 2. Build the project:
@@ -73,45 +75,22 @@ GOOGLE_REDIRECT_URI=your_google_redirect_uri
 
 2. The application will be available at `http://localhost:4000`.
 
-## API Endpoints
+## Swagger Documentation
 
-### Authentication
+The API documentation is available via Swagger. Once the application is running, you can access the Swagger UI at:
 
-- `POST /auth/google/callback` - Google OAuth callback
-- `PUT /auth/setup` - Setup user profile
-- `POST /auth/refresh-token` - Refresh JWT token
-
-### Users
-
-- `GET /users/{username}` - Get user profile
-- `POST /users/{username}/follow` - Follow/unfollow user
-- `GET /users` - Search users
-
-### Posts
-
-- `POST /posts` - Create a post
-- `POST /posts/replies` - Reply to a post
-- `POST /posts/{id}/repost` - Repost a post
-- `POST /posts/{id}/like` - Like/unlike a post
-- `GET /posts` - Query posts
-- `GET /posts/{id}` - Get a post
-- `GET /posts/{id}/nested` - Get nested posts
-- `GET /posts/{id}/like-info` - Get like info
-- `DELETE /posts/{id}` - Delete a post
-- `GET /posts/replies` - Get user replies
-- `GET /posts/reposts` - Get user reposts
-
-### Notifications
-
-- `GET /notifications` - Get notifications
-
-## Running Tests
-
-To run the tests, use the following command:
-
-```sh
-./gradlew test
 ```
+http://localhost:4000/api/swagger-ui/index.html
+```
+
+## Database Migration
+
+The database schema is managed using migration files located in the `src/main/resources/db/migration` directory.
+
+To manually apply the migrations, follow these steps:
+
+1. Ensure your PostgreSQL database is running.
+2. Use the Flyway CLI or a Flyway plugin for your build tool (Gradle or Maven) to apply migrations.
 
 ## Contributing
 

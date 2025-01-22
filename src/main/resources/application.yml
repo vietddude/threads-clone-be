@@ -40,3 +40,12 @@ logging:
   level:
     root: info
     viet.io.threads.security: debug
+
+swagger:
+  enabled: true
+  title: Threads API
+  description: Threads API Documentation
+  version: 1.0
+  contact:
+    name: vietddude
+    email: vietnd.works@gmail.com
